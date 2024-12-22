@@ -2,7 +2,6 @@ import os
 from tkinter import filedialog
 
 import customtkinter
-
 from Config import Config
 
 
@@ -64,8 +63,8 @@ class SettingsFrame(customtkinter.CTkFrame):
                                                 filetypes=fileTypes)
         if len(filename) == 0:
             return
-        filename.removesuffix(".gpx")
-        filename += ".gpx"
+
+        filename = filename.removesuffix(".gpx") + ".gpx"
         self.saveFileCallback(filename)
 
     def addTimeUI(self, column: int, default: str,
