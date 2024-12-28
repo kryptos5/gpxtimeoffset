@@ -12,6 +12,7 @@ This proves to be a frustration, but not enough for me to ditch the device. Not 
 
 The executable file for the app can be found under `gpxtimeoffset/dist`. But I wouldn't want to run any unverified app downloaded off the internet. You shouldn't, either. Download the project and follow one of the two methods below to use the app.
 
+![BeforeAfter](screenshots/strava_before_after.png "Before and after modification")
 ## Running GPX Time Offset in a Virtual Environment
 Python virtual environments are isolated spaces that allow you to manage project-specific dependencies without affecting your system's global Python installation. To do so, follow the steps below.
 
