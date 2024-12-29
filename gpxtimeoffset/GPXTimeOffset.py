@@ -28,10 +28,11 @@ class GPXTimeOffset():
             raise Exception("Open a file first")
 
         self.modifiedXMLData = copy(self.xmlData)
+        timeFormat = self.getTimeFormat()
+
         for time in self.modifiedXMLData.find_all("time"):
             timestr = time.text
-            rawtime = datetime.datetime.strptime(timestr,
-                                                 "%Y-%m-%dT%H:%M:%S.%fZ")
+            rawtime = datetime.datetime.strptime(timestr, timeFormat)
             rawtime += datetime.timedelta(hours=offsetHours,
                                           minutes=offsetMinutes,
                                           seconds=offsetSeconds)
@@ -45,3 +46,13 @@ class GPXTimeOffset():
             raise Exception("Nothing to save")
         with open(filePath, 'w') as f:
             f.write(str(self.modifiedXMLData))
+
+    def getTimeFormat(self):
+        firstTimeNode = self.modifiedXMLData.find("time")
+        if firstTimeNode is not None:
+            try:
+                datetime.datetime.strptime(firstTimeNode.text,
+                                           "%Y-%m-%dT%H:%M:%S.%fZ")
+            except ValueError:
+                return "%Y-%m-%dT%H:%M:%SZ"
+        return "%Y-%m-%dT%H:%M:%S.%fZ"

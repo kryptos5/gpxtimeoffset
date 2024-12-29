@@ -3,12 +3,15 @@ from tkinter import filedialog
 
 import customtkinter
 from Config import Config
+from GUI.MessageBox import MessageBox
 
 
 class SettingsFrame(customtkinter.CTkFrame):
 
-    def __init__(self, master, applySettingsCallback, saveFileCallback):
+    def __init__(self, master, applySettingsCallback: callable,
+                 saveFileCallback: callable):
         super().__init__(master)
+        self.master = master
         self.applySettingsCallback = applySettingsCallback
         self.saveFileCallback = saveFileCallback
         self.grid_rowconfigure(0, weight=0)
@@ -48,9 +51,13 @@ class SettingsFrame(customtkinter.CTkFrame):
         self.enableSave(False)
 
     def applySettings(self):
-        offsetHours = int(self.textboxHours.get(0.0, "end"))
-        offsetMinutes = int(self.textboxMinutes.get(0.0, "end"))
-        offsetSeconds = int(self.textboxSeconds.get(0.0, "end"))
+        try:
+            offsetHours = int(self.textboxHours.get())
+            offsetMinutes = int(self.textboxMinutes.get())
+            offsetSeconds = int(self.textboxSeconds.get())
+        except ValueError:
+            MessageBox(parent=self.master,
+                       message="Time offset must be numerical characters.")
         self.applySettingsCallback(offsetHours=offsetHours,
                                    offsetMinutes=offsetMinutes,
                                    offsetSeconds=offsetSeconds)
@@ -68,16 +75,18 @@ class SettingsFrame(customtkinter.CTkFrame):
         self.saveFileCallback(filename)
 
     def addTimeUI(self, column: int, default: str,
-                  label: str) -> tuple[customtkinter.CTkTextbox, int]:
-        textbox = customtkinter.CTkTextbox(master=self,
-                                           corner_radius=0,
-                                           height=Config.DEFAULT_HEIGHT,
-                                           width=30)
+                  label: str) -> tuple[customtkinter.CTkEntry, int]:
+        textbox = customtkinter.CTkEntry(
+            master=self,
+            corner_radius=0,
+            height=Config.DEFAULT_HEIGHT,
+            width=40,
+        )
         textbox.grid(row=0,
                      column=column,
                      padx=Config.DEFAULT_PADX_MIDDLE,
                      pady=Config.DEFAULT_PADY)
-        textbox.insert((0.0), default)
+        textbox.insert(0, default)
 
         label = customtkinter.CTkLabel(master=self,
                                        text=label,

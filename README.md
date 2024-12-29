@@ -53,6 +53,6 @@ pip install pyinstaller
 2. Navigate to the root directory of the project.
 3. Run the packaging command to generate the executable:
 ```bash
-pyinstaller --onefile GUI/App.py
+pyinstaller --onefile gpxtimeoffset/App.py
 ```
 4. The executable can be found in the `dist` folder.

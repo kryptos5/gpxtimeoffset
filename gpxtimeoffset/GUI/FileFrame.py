@@ -7,7 +7,7 @@ from Config import Config
 
 class FileFrame(customtkinter.CTkFrame):
 
-    def __init__(self, master, openFileCallback):
+    def __init__(self, master, openFileCallback: callable):
         super().__init__(master)
         self.openFileCallback = openFileCallback
         self.grid_columnconfigure(1, weight=1)
@@ -22,9 +22,9 @@ class FileFrame(customtkinter.CTkFrame):
                    pady=Config.DEFAULT_PADY,
                    sticky="w")
 
-        self.textbox = customtkinter.CTkTextbox(master=self,
-                                                corner_radius=0,
-                                                height=Config.DEFAULT_HEIGHT)
+        self.textbox = customtkinter.CTkEntry(master=self,
+                                              corner_radius=0,
+                                              height=Config.DEFAULT_HEIGHT)
         self.textbox.grid(row=0,
                           column=1,
                           padx=Config.DEFAULT_PADX_MIDDLE,
@@ -47,6 +47,6 @@ class FileFrame(customtkinter.CTkFrame):
                                               filetypes=fileTypes)
         if len(filename) == 0:
             return
-        self.textbox.delete("0.0", "end")
-        self.textbox.insert((0.0), filename)
+        self.textbox.delete(0, "end")
+        self.textbox.insert(0, filename)
         self.openFileCallback(filename)
