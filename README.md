@@ -1,7 +1,11 @@
+
 # GPX Time Offset
 GPX Time Offset is a Python script that offsets every record in a GPX file by the same amount of time. It comes with a sleek UI that allows you to load a GPX file, offset the time as desired and save the modified file.
 
-![Screenshot](screenshots/main_ui.png "GPX Time Offset comes with a sleek UI designed with CustomTkinter")
+<figure>
+  <img src="screenshots/main_ui.png" alt="GPX Time Offset comes with a sleek UI designed with CustomTkinter">
+  <figcaption style="text-align:center">GPX Time Offset comes with a sleek UI designed with CustomTkinter</figcaption>
+</figure>
 
 ## Background
 "But, why?" you ask.
@@ -12,7 +16,11 @@ This proves to be a frustration, but not enough for me to ditch the device. Not 
 
 The executable file for the app can be found under `gpxtimeoffset/dist`. But I wouldn't want to run any unverified app downloaded off the internet. You shouldn't, either. Download the project and follow one of the two methods below to use the app.
 
-![BeforeAfter](screenshots/strava_before_after.png "Before and after modification")
+<figure>
+  <img src="screenshots/strava_before_after.png" alt="Before and after time offset">
+  <figcaption style="text-align:center">Before and after time offset</figcaption>
+</figure>
+
 ## Running GPX Time Offset in a Virtual Environment
 Python virtual environments are isolated spaces that allow you to manage project-specific dependencies without affecting your system's global Python installation. To do so, follow the steps below.
 
